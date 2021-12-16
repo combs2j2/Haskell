@@ -12,11 +12,11 @@ isPrime n = if myLen [x | x <- numsBelowSquareRoot n, mod n x == 0] == 0 then Tr
 
 listOfPrimes = [x | x <- [2..], isPrime x]
 
-numPrimesUpTo :: Int -> Int
-numPrimesUpTo 0 = 0
-numPrimesUpTo 1 = 0
-numPrimesUpTo 2 = 1
-numPrimesUpTo n = if isPrime n then 1 + numPrimesUpTo (n-1) else numPrimesUpTo (n-1)
+go :: Int -> Int -> Int
+go a 0 = a
+go a n = if isPrime n then go (a+1) (n-1) else go a (n-1)
+
+numPrimesUpTo = go 0
 
 densityOfPrimes :: Int -> Rational
 densityOfPrimes 0 = 0
