@@ -30,3 +30,21 @@ relativelyPrime a b = if (gcd a b) == 1 then True else False
 
 eulerPhi :: Int -> Int
 eulerPhi n = length [x | x <- [1..n], relativelyPrime x n]
+
+primeDivisors :: Integer -> [Integer]
+primeDivisors 1 = [1]
+primeDivisors 0 = [1..]
+primeDivisors n = if isPrime n then [n] else [x | x <- [1..(isqrt n)], divides x n, isPrime x]
+
+divides :: Integer -> Integer -> Bool
+divides x n = if n `mod` x == 0 then True else False
+
+pfHelp :: [Integer] -> Integer -> [Integer]
+pfHelp a 1 = []
+pfHelp a 0 = error "infinitely many prime factorizations of 0"
+pfHelp a n
+	| isPrime n = a ++ [n]
+	| (isPrime n == False) = pfHelp (a ++ [b]) (n `div` b) where
+		b = head (primeDivisors n)
+
+primeFactorization = pfHelp []
