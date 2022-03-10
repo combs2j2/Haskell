@@ -27,7 +27,7 @@ member elt [] = False
 member elt (x:xs) = if elt == x then True else member elt xs
 
 millerRabin :: Integer -> Integer -> Bool
-millerRabin a p = if gcd a p /= 1 then error "a and p must be relatively prime" else
+millerRabin a p = if gcd a p /= 1 then False else
 	if (p `mod` 2 == 0) then False else do
 	let testCongs = map (\x -> ((powMod a x p) + 1) `mod` p == 0) (powers (p-1))
 	if (member True testCongs) || (((powMod a (last (powers (p-1))) p) - 1) `mod` p == 0) then True else False
