@@ -17,7 +17,7 @@ findSHelp acc n = if n `mod` 2 == 0 then findSHelp (acc+1) (n `div` 2) else acc
 
 findS = findSHelp 0
 
--- powers determines 
+-- powers returns a list of all the powers of 2 up to s where n=(2^s)*d and d is odd
 powers :: Integer -> [Integer]
 powers n = map (\x -> (n `div` (2^x))) [1..((findS n))]
 
