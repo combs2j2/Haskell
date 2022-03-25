@@ -24,8 +24,9 @@ getStackTop (Stack {stackList = thisStackList, top = thisTop}) = thisTop
 
 -- ***** POP FUNCTION *****
 popStack :: Stack a -> Stack a
-popStack (Stack {stackList = thisStackList, top = thisTop}) = if (length thisStackList) == 0
-															      then error "popStack error: cannot pop from an empty stack"
-															  else if (length thisStackList) == 1
-																  then Stack {stackList = [], top = Nothing}
-															  else Stack {stackList = (init thisStackList), top = Just (last (init thisStackList))}
+popStack (Stack {stackList = thisStackList, top = thisTop}) = 
+	if (length thisStackList) == 0
+		then error "popStack error: cannot pop from an empty stack"
+	else if (length thisStackList) == 1
+	  	then Stack {stackList = [], top = Nothing}
+      	else Stack {stackList = (init thisStackList), top = Just (last (init thisStackList))}
